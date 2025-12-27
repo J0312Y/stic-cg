@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STIC-CONGO | Expertise IT & Cybersécurité</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0a2540;   /* Bleu Nuit (Sécurité) */
+            --accent: #00d4ff;    /* Cyan (Innovation) */
+            --secondary: #0055ff; /* Bleu Royal */
+            --light: #f8fbff;
+            --white: #ffffff;
+            --header-height: 80px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background-color: var(--light); }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: var(--white);
+            height: var(--header-height);
+            padding: 0 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 2000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        .logo-container { display: flex; align-items: center; text-decoration: none; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .logo span { color: var(--accent); }
+        
+        nav ul { display: flex; list-style: none; align-items: center; }
+        nav ul li { margin-left: 25px; }
+        nav ul li a { text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.3s; font-size: 0.95rem; }
+        nav ul li a:hover { color: var(--accent); }
+        
+        .btn-header {
+            background: var(--secondary);
+            color: white !important;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn-header:hover { background: var(--primary); }
+
+        /* --- HERO SLIDER --- */
+        .hero-slider {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            color: white;
+        }
+        .slide.active { opacity: 1; z-index: 10; }
+        
+        .hero-content { 
+            padding: 0 10%; 
+            margin-top: var(--header-height); /* Évite que le texte soit caché par le header */
+            max-width: 1000px;
+        }
+        .hero-content h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 20px; 
+            font-weight: 800; 
+            text-shadow: 2px 2px 15px rgba(0,0,0,0.6); 
+        }
+        .hero-content p { 
+            font-size: 1.3rem; 
+            margin-bottom: 35px; 
+            opacity: 0.95; 
+            text-shadow: 1px 1px 10px rgba(0,0,0,0.6); 
+        }
+
+        .btn-submit {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 16px 35px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .btn-submit:hover { background: var(--white); transform: translateY(-3px); }
+
+        /* --- SERVICES / CARDS --- */
+        .section-padding { padding: 100px 10%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .card {
+            background: var(--white);
+            padding: 45px;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid #edf2f7;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 85, 255, 0.1);
+            border-color: var(--accent);
+        }
+        .card i { font-size: 3rem; color: var(--secondary); margin-bottom: 25px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary); }
+        .card p { font-size: 0.95rem; color: #606f7b; }
+
+        /* --- CONTACT & DIRECTIONS --- */
+        .contact-container {
+            background: var(--primary);
+            border-radius: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .contact-info { padding: 60px; flex: 1; min-width: 350px; color: white; }
+        .contact-form { padding: 60px; flex: 1.5; min-width: 350px; background: var(--white); }
+        
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 8px; color: var(--primary); font-weight: 700; }
+        input, textarea {
+            width: 100%; padding: 14px; border: 2px solid #e2e8f0; border-radius: 10px; outline: none; transition: 0.3s;
+        }
+        input:focus, textarea:focus { border-color: var(--accent); }
+
+        /* --- MAPS --- */
+        .map-box { margin-top: 20px; border-radius: 15px; overflow: hidden; height: 250px; border: 1px solid rgba(255,255,255,0.1); }
+
+        footer { background: #051628; color: white; padding: 50px 10%; text-align: center; border-top: 1px solid #1a2b3c; }
+
+        /* Responsivité Mobile */
+        @media (max-width: 768px) {
+            header { padding: 0 5%; }
+            nav { display: none; } /* On pourrait ajouter un menu burger ici */
+            .hero-content h1 { font-size: 2.2rem; }
+            .section-padding { padding: 60px 5%; }
+            .contact-info, .contact-form { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="" style="height: 45px; margin-right: 12px; border-radius: 4px;">
+            <a href="#" class="logo">STIC-<span>CONGO</span></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#propos">À Propos</a></li>
+                <li><a href="#localisation">Nos Bureaux</a></li>
+                <li><a href="#contact" class="btn-header">Audit Gratuit</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero-slider">
+        <div class="slide active" style="background-image: linear-gradient(rgba(10,37,64,0.75), rgba(10,37,64,0.75)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80');">
+            <div class="hero-content">
+                <h1>Expertise IT & Cybersécurité</h1>
+                <p>Accompagner la modernisation de vos systèmes d'information en Afrique avec des solutions sécurisées de bout en bout.</p>
+                <a href="#contact" class="btn-submit">Demander un Audit</a>
+            </div>
+        </div>
+        
+        <div class="slide" style="background-image: linear-gradient(rgba(10,37,64,0.75), rgba(10,37,64,0.75)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80');">
+            <div class="hero-content">
+                <h1>Proximité & Innovation</h1>
+                <p>Présents à Brazzaville et Kinshasa pour un support terrain réactif et une compréhension fine de vos enjeux métiers.</p>
+                <a href="#services" class="btn-submit">Nos Solutions Digitales</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="section-title">
+            <h2>Nos Solutions Digitales</h2>
+            <p>Des outils intégrés et évolutifs pour piloter votre performance interne et externe.</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <i class="fas fa-headset"></i>
+                <h3>Contact Center</h3>
+                <p>Solution omnicanale (WhatsApp, SMS, Email) avec IA pour une expérience client d'exception.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>ERP sur mesure</h3>
+                <p>Centralisez vos RH, finances et stocks avec une plateforme modulaire et Cloud (SaaS).</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-shield-virus"></i>
+                <h3>Cybersécurité</h3>
+                <p>Audit, conformité et protection des données pour sécuriser votre patrimoine numérique.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-credit-card"></i>
+                <h3>E-Paiement</h3>
+                <p>Plateforme de collecte sécurisée compatible Mobile Money et cartes bancaires.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="localisation" class="section-padding" style="background: #f0f4f8;">
+        <div class="section-title">
+            <h2>Où nous trouver ?</h2>
+            <p>Une expertise régionale avec deux bureaux stratégiques.</p>
+        </div>
+        <div class="grid">
+            <div class="card" style="text-align: left;">
+                <h3 style="color: var(--secondary);"><i class="fas fa-map-marker-alt"></i> Brazzaville (RC)</h3>
+                <p>Impasse 9, Centre-Ville, Brazzaville</p>
+                <p style="margin-top:10px; font-size: 0.85rem;"><strong>Directions :</strong> Situé en plein centre historique, accessible via les artères principales du Plateau.</p>
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.502!2d15.28!3d-4.26!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMTUnMzYuMCJTIDE1wrAxNic0OC4wIkU!5e0!3m2!1sfr!2scg!4v1625000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="card" style="text-align: left;">
+                <h3 style="color: var(--secondary);"><i class="fas fa-building"></i> Kinshasa (RDC)</h3>
+                <p>Hôtel Memling, Avenue du Tchad, Gombe</p>
+                <p style="margin-top:10px; font-size: 0.85rem;"><strong>Directions :</strong> Bureau situé au sein du prestigieux Hôtel Memling, quartier Gombe.</p>
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.5278!2d15.309!3d-4.30!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a6a310000000001%3A0x6161616161616161!2sHotel%20Memling!5e0!3m2!1sfr!2scd!4v1625000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Parlons de votre projet</h2>
+                <p style="margin: 20px 0; opacity: 0.8;">Faites évoluer votre modèle opérationnel avec STIC-CONGO.</p>
+                <p><i class="fab fa-whatsapp"></i> +242 06 858 10 61 (Brazza)</p>
+                <p><i class="fab fa-whatsapp"></i> +243 86 195 80 00 (Kin)</p>
+                <p><i class="fas fa-envelope"></i> contact@stic-congo.net</p>
+                <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                    <p><strong>Brazzaville :</strong> Impasse 9, Centre-Ville</p>
+                    <p><strong>Kinshasa :</strong> Hôtel Memling, Gombe</p>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/VOTRE_ID_FORMSPREE" method="POST">
+                    <div class="form-group">
+                        <label>Nom de l'entreprise</label>
+                        <input type="text" name="company" placeholder="Ex: STIC-CONGO" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Professionnel</label>
+                        <input type="email" name="email" placeholder="contact@votre-societe.net" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" rows="5" placeholder="Décrivez votre besoin IT..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit" style="width: 100%;">Envoyer la demande</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 STIC-CONGO. Tous droits réservés.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Leadership Produit | Excellence Opérationnelle | Proximité Client</p>
+    </footer>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 5000); // Change toutes les 5 secondes
+    </script>
+</body>
+</html>
